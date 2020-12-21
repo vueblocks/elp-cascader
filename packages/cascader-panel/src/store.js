@@ -31,6 +31,14 @@ export default class Store {
     const node = new Node(nodeData, this.config, parentNode)
     const children = parentNode ? parentNode.children : this.nodes
 
+    // Skip if the node already exists
+    const _idx = children.findIndex(item => item.value === node.value)
+    if (_idx > -1) {
+      // replace the old node when the value repeats
+      // children.splice(_idx, 1, node)
+      return
+    }
+
     children.push(node)
   }
 
