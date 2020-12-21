@@ -1,6 +1,6 @@
 <template>
-  <div class="el-cascader-menu">
-    <div class="el-cascader-menu__wrap el-cascader-menu__list">
+  <div class="elp-cascader-menu">
+    <div class="elp-cascader-menu__wrap elp-cascader-menu__list">
       <!--      <div style="padding: 5px 20px">-->
       <!--        <el-input-->
       <!--            v-model.trim="searchKey"-->
@@ -10,7 +10,7 @@
       <!--            @input="handleFilterNode"-->
       <!--        />-->
       <!--      </div>-->
-      <div v-if="isEmpty" class="el-cascader-menu__empty-text">
+      <div v-if="isEmpty" class="elp-cascader-menu__empty-text">
         {{ emptyText }}
       </div>
       <recycle-scroller
@@ -33,7 +33,7 @@
       <svg
           v-if="isHover"
           ref='hoverZone'
-          class='el-cascader-menu__hover-zone'
+          class='elp-cascader-menu__hover-zone'
       />
     </div>
   </div>

@@ -20,7 +20,7 @@ const checkNode = el => {
 const getSibling = (el, distance) => {
   const { parentNode } = el
   if (parentNode) {
-    const siblings = parentNode.querySelectorAll('.el-cascader-node[tabindex="-1"]')
+    const siblings = parentNode.querySelectorAll('.elp-cascader-node[tabindex="-1"]')
     const index = Array.prototype.indexOf.call(siblings, el)
     return siblings[index + distance] || null
   }

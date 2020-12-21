@@ -2,7 +2,6 @@
   <div
       :class="[
           'elp-cascader-panel',
-          'el-cascader-panel',
           border && 'is-bordered'
        ]"
       @keydown="handleKeyDown">
@@ -200,7 +199,7 @@ export default {
         case KeyCode.left: {
           const preMenu = this.$refs.menu[getMenuIndex(target) - 1]
           if (preMenu) {
-            const expandedNode = preMenu.$el.querySelector('.el-cascader-node[aria-expanded="true"]')
+            const expandedNode = preMenu.$el.querySelector('.elp-cascader-node[aria-expanded="true"]')
             focusNode(expandedNode)
           }
           break
@@ -208,7 +207,7 @@ export default {
         case KeyCode.right: {
           const nextMenu = this.$refs.menu[getMenuIndex(target) + 1]
           if (nextMenu) {
-            const firstNode = nextMenu.$el.querySelector('.el-cascader-node[tabindex="-1"]')
+            const firstNode = nextMenu.$el.querySelector('.elp-cascader-node[tabindex="-1"]')
             focusNode(firstNode)
           }
           break
@@ -303,9 +302,9 @@ export default {
       menus.forEach(menu => {
         const menuElement = menu.$el
         if (menuElement) {
-          const container = menuElement.querySelector('.el-cascader-menu__wrap')
-          const activeNode = menuElement.querySelector('.el-cascader-node.is-active') ||
-              menuElement.querySelector('.el-cascader-node.in-active-path')
+          const container = menuElement.querySelector('.elp-cascader-menu__wrap')
+          const activeNode = menuElement.querySelector('.elp-cascader-node.is-active') ||
+              menuElement.querySelector('.elp-cascader-node.in-active-path')
           scrollIntoView(container, activeNode)
         }
       })

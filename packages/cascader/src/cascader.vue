@@ -3,9 +3,8 @@
       ref="reference"
       :class="[
           'elp-cascader',
-          'el-cascader',
           { 'is-disabled': isDisabled },
-          realSize && `el-cascader--${realSize}`
+          realSize && `elp-cascader--${realSize}`
       ]"
       v-clickoutside="() => toggleDropDownVisible(false)"
       @keydown="handleKeyDown"
@@ -45,7 +44,7 @@
       </template>
     </el-input>
 
-    <div v-if="multiple" class="el-cascader__tags">
+    <div v-if="multiple" class="elp-cascader__tags">
       <el-tag
           v-for="(tag, index) in presentTags"
           :key="tag.key"
@@ -61,7 +60,7 @@
           v-if="filterable && !isDisabled"
           v-model.trim="inputValue"
           type="text"
-          class="el-cascader__search-input"
+          class="elp-cascader__search-input"
           :placeholder="presentTags.length ? '' : placeholder"
           @input="e => handleInput(inputValue, e)"
           @click.stop="toggleDropDownVisible(true)"
@@ -76,7 +75,7 @@
           :class="[
               'elp-cascader__dropdown',
               'el-popper',
-              'el-cascader__dropdown',
+              'elp-cascader__dropdown',
                popperClass
           ]">
         <elp-cascader-panel
@@ -96,8 +95,8 @@
             v-if="filterable"
             v-show="filtering"
             tag="ul"
-            class="el-cascader__suggestion-panel"
-            view-class="el-cascader__suggestion-list"
+            class="elp-cascader__suggestion-panel"
+            view-class="elp-cascader__suggestion-list"
             @keydown.native="handleSuggestionKeyDown">
           <template v-if="suggestions.length">
             <li
@@ -105,7 +104,7 @@
                 :key="item.uid"
                 :tabindex="-1"
                 :class="[
-                    'el-cascader__suggestion-item',
+                    'elp-cascader__suggestion-item',
                     item.checked && 'is-checked'
                 ]"
                 @click="handleSuggestionClick(index)">
@@ -114,7 +113,7 @@
             </li>
           </template>
           <slot v-else name="empty">
-            <li class="el-cascader__empty-text">{{ emptyText }}</li>
+            <li class="elp-cascader__empty-text">{{ emptyText }}</li>
           </slot>
         </scrollbar>
       </div>
@@ -436,10 +435,10 @@ export default {
         let firstNode = null
 
         if (filtering && suggestionPanel) {
-          firstNode = suggestionPanel.$el.querySelector('.el-cascader__suggestion-item')
+          firstNode = suggestionPanel.$el.querySelector('.elp-cascader__suggestion-item')
         } else {
-          const firstMenu = popper.querySelector('.el-cascader-menu')
-          firstNode = firstMenu.querySelector('.el-cascader-node[tabindex="-1"]')
+          const firstMenu = popper.querySelector('.elp-cascader-menu')
+          firstNode = firstMenu.querySelector('.elp-cascader-node[tabindex="-1"]')
         }
 
         if (firstNode) {
@@ -597,17 +596,17 @@ export default {
 
       if (!inputInner) return
 
-      const tags = $el.querySelector('.el-cascader__tags')
+      const tags = $el.querySelector('.elp-cascader__tags')
       let suggestionPanelEl = null
 
       if (suggestionPanel && (suggestionPanelEl = suggestionPanel.$el)) {
-        const suggestionList = suggestionPanelEl.querySelector('.el-cascader__suggestion-list')
+        const suggestionList = suggestionPanelEl.querySelector('.elp-cascader__suggestion-list')
         suggestionList.style.minWidth = inputInner.offsetWidth + 'px'
       }
 
       if (tags) {
         const { offsetHeight } = tags
-        const height = Math.max(offsetHeight + 6, inputInitialHeight) + 'px'
+        const height = Math.max(offsetHeight + 4, inputInitialHeight) + 'px'
         inputInner.style.height = height
         this.updatePopper()
       }
