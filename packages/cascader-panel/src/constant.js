@@ -12,7 +12,8 @@ const DefaultProps = {
   multiple: false,
   checkStrictly: false,
   expandTrigger: 'click', // click / hover
-  hoverThreshold: 500
+  hoverThreshold: 500,
+  selectWithExpand: true // when node is selectable, click event trigger expand event
 }
 
 export {

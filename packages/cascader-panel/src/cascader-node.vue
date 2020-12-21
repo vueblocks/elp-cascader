@@ -78,7 +78,7 @@ export default {
     handleCheckChange () {
       const { panel, value, node } = this
       panel.handleCheckChange(value)
-      panel.handleExpand(node)
+      if (panel.config.selectWithExpand) panel.handleExpand(node)
     },
 
     handleMultiCheckChange (checked) {
