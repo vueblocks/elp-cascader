@@ -1,9 +1,9 @@
 {
   "name": "@vueblocks/elp-cascader",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A vue component based on 'element-ui' and 'vue-virtual-scroller'",
   "license": "MIT",
-  "repository": "https://github.com/zimuZhao/elp-cascader",
+  "repository": "https://github.com/vueblocks/elp-cascader",
   "main": "lib/elp-cascader.umd.min.js",
   "keywords": [
     "vueblocks",
@@ -52,7 +52,9 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {
+      "no-debugger": "off"
+    }
   },
   "browserslist": [
     "> 1%",

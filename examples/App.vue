@@ -74,7 +74,8 @@ export default {
       options: _mock.array,
       props: {
         multiple: false,
-        checkStrictly: true
+        checkStrictly: true,
+        selectWithExpand: false
         // lazy: true,
         // lazyLoad (node, resolve) {
         //   // const { level } = node
@@ -94,10 +95,9 @@ export default {
       ],
       lazyProps: {
         lazy: true,
-        multiple: true,
+        multiple: false,
         checkStrictly: true,
         lazyLoad (node, resolve) {
-          console.warn(node)
           const { level } = node
           setTimeout(() => {
             const nodes = Array.from({ length: level + 1 }).map(() => ({
