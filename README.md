@@ -4,6 +4,8 @@
 
 [在线demo](<https://baidu.com>)
 
+[CHANGELOG](CHANGELOG.md)
+
 ## 效果预览
 
 ![elp-cascader](./docs/assets/demo.gif)
@@ -55,20 +57,3 @@ export default {
 **Attributes、Events、Methods、Props**
 
 详见[ElementUI-Cascader](https://element.eleme.io/#/zh-CN/component/cascader)
-
-## 更新日志
-
-**版本：0.1.1**
-
-时间：2020-12-06
-
-内容：
-
-- [refactor]调整资源样式打包方式，避免污染到存在不同版本'element-ui'的项目
-**版本：0.1.0**
-
-时间：2020-12-01
-
-内容：
-
-- [feat]初版
