@@ -126,7 +126,8 @@ export default {
         nativeOn: {}
       }
 
-      if (config.checkStrictly) { // when every node is selectable, click event should not trigger expand event.
+      // when every node is selectable, click event should not trigger expand event.
+      if (config.checkStrictly || config.lazyMultiCheck) {
         events.nativeOn.click = stopPropagation
       }
 

@@ -1,13 +1,13 @@
 import { coerceTruthyValueToArray, valueEquals } from 'element-ui/src/utils/util'
 import Node from './node'
 
-const flatNodes = (data, leafOnly) => {
+const flatNodes = (data, leafOnly, lazyMultiCheck) => {
   return data.reduce((res, node) => {
     if (node.isLeaf) {
       res.push(node)
     } else {
-      !leafOnly && res.push(node)
-      res = res.concat(flatNodes(node.children, leafOnly))
+      (!leafOnly || lazyMultiCheck) && res.push(node)
+      res = res.concat(flatNodes(node.children, leafOnly, lazyMultiCheck))
     }
     return res
   }, [])
@@ -55,7 +55,7 @@ export default class Store {
     const cachedNodes = leafOnly ? this.leafNodes : this.flattedNodes
     return cached
       ? cachedNodes
-      : flatNodes(this.nodes, leafOnly)
+      : flatNodes(this.nodes, leafOnly, this.config.lazyMultiCheck)
   }
 
   getNodeByValue (value) {

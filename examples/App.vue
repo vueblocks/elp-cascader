@@ -10,6 +10,7 @@
         v-model="lazyValue"
         :props="lazyProps"
         :options="lazyOptions"
+        filterable
         style="margin: 200px 0;width: 400px"
         @expand-change="expandChange"
     />
@@ -90,20 +91,21 @@ export default {
         ['1', '2']
       ],
       lazyOptions: [
-        { label: '111', value: '111', children: [] },
-        { label: '选项1', value: '1', children: [{ label: '选项2', value: '2' }] }
+        // { label: '111', value: '111', children: [] },
+        // { label: '选项1', value: '1', children: [{ label: '选项2', value: '2' }] }
       ],
       lazyProps: {
         lazy: true,
-        multiple: false,
-        checkStrictly: true,
+        multiple: true,
+        checkStrictly: false,
+        lazyMultiCheck: true,
         lazyLoad (node, resolve) {
           const { level } = node
           setTimeout(() => {
             const nodes = Array.from({ length: level + 1 }).map(() => ({
               value: String(++id),
               label: `选项${id}`,
-              leaf: level >= 2
+              leaf: level >= 3
             }))
             // 通过调用resolve将子节点数据返回，通知组件数据加载完成
             resolve(nodes)
