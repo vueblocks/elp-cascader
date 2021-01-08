@@ -23,6 +23,7 @@ yarn add @vueblocks/elp-cascader
 在main.js中写入下面的代码
 
 ```javascript
+import '@vueblocks/elp-cascader/lib/elp-cascader.css'
 import ElpCascader from '@vueblocks/cascader'
 Vue.use(ElpCascader)
 ```
@@ -57,3 +58,18 @@ export default {
 **Attributes、Events、Methods、Props**
 
 详见[ElementUI-Cascader](https://element.eleme.io/#/zh-CN/component/cascader)
+
+
+**改动项**
+
+1. Element底层组件当option重复时，会出一个空白节点
+    解决逻辑：重复时保留老节点，舍去新节点
+2.Element多选状态下，第一个搜索词选中内容后，搜索词被清空
+    解决逻辑：保留第一个搜索词
+
+props中新增属性
+
+| 参数 | 说明 | 类型 | 可选值 | 默认值 |
+| --- | --- | --- | --- | --- |
+| selectWithExpand | 单选且checkStrictly为true时是否展开下一级 | boolean | - | false |
+| lazyMultiCheck | 多选且懒加载时取值 | boolean | - | false |
