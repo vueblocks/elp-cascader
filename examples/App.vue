@@ -11,7 +11,15 @@
         :props="lazyProps"
         :options="lazyOptions"
         filterable
-        style="margin: 200px 0;width: 400px"
+        style="margin: 100px 0;width: 400px"
+        @expand-change="expandChange"
+    />
+    <cascader
+        v-model="lazyCheck"
+        :props="lazyMutiProps"
+        :options="options"
+        filterable
+        style="margin: 100px 0;width: 400px"
         @expand-change="expandChange"
     />
 
@@ -40,7 +48,7 @@ export default {
     console.log('Mock Start')
     console.time('MockStart')
     const _mock = Mock.mock({
-      'array|1000': [
+      'array|200': [
         {
           label: '@csentence(6)',
           value: '@string()',
@@ -90,6 +98,7 @@ export default {
       lazyValue: [
         ['1', '2']
       ],
+      lazyCheck: [],
       lazyOptions: [
         // { label: '111', value: '111', children: [] },
         // { label: '选项1', value: '1', children: [{ label: '选项2', value: '2' }] }
@@ -99,6 +108,25 @@ export default {
         multiple: true,
         checkStrictly: false,
         lazyMultiCheck: true,
+        panelLabels: ['一级类目', '二级类目', '三级类目'],
+        lazyLoad (node, resolve) {
+          const { level } = node
+          setTimeout(() => {
+            const nodes = Array.from({ length: level + 1 }).map(() => ({
+              value: String(++id),
+              label: `选项${id}`,
+              leaf: level >= 3
+            }))
+            // 通过调用resolve将子节点数据返回，通知组件数据加载完成
+            resolve(nodes)
+          }, 1000)
+        }
+      },
+      lazyMutiProps: {
+        lazy: true,
+        multiple: true,
+        checkStrictly: true,
+        panelLabels: ['一级类目', '二级类目', '三级类目'],
         lazyLoad (node, resolve) {
           const { level } = node
           setTimeout(() => {
