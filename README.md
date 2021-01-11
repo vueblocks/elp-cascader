@@ -2,13 +2,11 @@
 
 > 基于`element-ui`和`vue-virtual-scroller`的级联选择器，用虚拟列表的方式逐级渲染列表。适用于数据量较大的场景。
 
-[在线demo](<https://baidu.com>)
-
-[CHANGELOG](CHANGELOG.md)
+[Demo](<https://vueblocks.github.io/elp-cascader/>)
 
 ## 效果预览
 
-![elp-cascader](./docs/assets/demo.gif)
+![elp-cascader](./demo.gif)
 
 ## install 安装
 
@@ -60,16 +58,22 @@ export default {
 详见[ElementUI-Cascader](https://element.eleme.io/#/zh-CN/component/cascader)
 
 
-**改动项**
+## 💡 与Element cascader的区别项
 
-1. Element底层组件当option重复时，会出一个空白节点
+1. el-cascader当option重复时，会出一个空白节点
+
     解决逻辑：重复时保留老节点，舍去新节点
-2.Element多选状态下，第一个搜索词选中内容后，搜索词被清空
+    
+2. el-cascader多选状态下，第一个搜索词选中内容后，搜索词被清空
+
     解决逻辑：保留第一个搜索词
 
-props中新增属性
+3. props中新增属性
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 | --- | --- | --- | --- | --- |
 | selectWithExpand | 单选且checkStrictly为true时是否展开下一级 | boolean | - | false |
 | lazyMultiCheck | 多选且懒加载时取值 | boolean | - | false |
+
+
+[CHANGELOG](CHANGELOG.md)
