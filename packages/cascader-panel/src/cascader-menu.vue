@@ -1,15 +1,25 @@
 <template>
   <div class="elp-cascader-menu">
     <div class="elp-cascader-menu__wrap elp-cascader-menu__list">
-      <!--      <div style="padding: 5px 20px">-->
-      <!--        <el-input-->
-      <!--            v-model.trim="searchKey"-->
-      <!--            placeholder="请输入内容"-->
-      <!--            size="small"-->
-      <!--            suffix-icon="el-icon-search"-->
-      <!--            @input="handleFilterNode"-->
-      <!--        />-->
-      <!--      </div>-->
+      <div v-if="searchAndCheckVisibel"  class="elp-search-check">
+        <div class="elp-search-check__check">
+          <div>{{menuLabel}}</div>
+          <el-checkbox
+            :value="menuCheckState.checked"
+            :indeterminate="menuCheckState.indeterminate"
+            @change="onMenuCheck"
+          >全选</el-checkbox>
+        </div>
+        <div style="padding: 5px 20px">
+          <el-input
+            v-model.trim="keyWordsTemp"
+            placeholder="请输入内容"
+            size="small"
+            suffix-icon="el-icon-search"
+            @input="handleSearchInput"
+          />
+        </div>
+      </div>
       <div v-if="isEmpty" class="elp-cascader-menu__empty-text">
         {{ emptyText }}
       </div>
@@ -17,17 +27,17 @@
           v-else
           v-slot="{ item, index }"
           :buffer="100"
-          :items="nodes"
+          :items="filterNodes"
           :item-size="34"
           key-field="value"
-          style="height: 100%">
+          :style="{ height: scrollHeight }">
         <cascader-node
-            :key="item.uid"
-            :node="item"
-            :node-id="`${menuId}-${index}`"
-            :aria-haspopup="item.hasChildren"
-            :aria-owns="item.hasChildren ? menuId : null"
-            @expand="isHover && handleExpand"
+          :key="item.uid"
+          :node="item"
+          :node-id="`${menuId}-${index}`"
+          :aria-haspopup="item.hasChildren"
+          :aria-owns="item.hasChildren ? menuId : null"
+          @expand="isHover && handleExpand"
         />
       </recycle-scroller>
       <svg
@@ -42,8 +52,12 @@
 <script>
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 import { RecycleScroller } from 'vue-virtual-scroller'
+import ElInput from 'element-ui/packages/input'
+import { coerceTruthyValueToArray } from 'element-ui/src/utils/util'
 
 import CascaderNode from './cascader-node.vue'
+import ElCheckbox from 'element-ui/packages/checkbox'
+import debounce from 'throttle-debounce/debounce'
 
 export default {
   name: 'ElpCascaderMenu',
@@ -52,7 +66,9 @@ export default {
 
   components: {
     RecycleScroller,
-    CascaderNode
+    CascaderNode,
+    ElInput,
+    ElCheckbox
   },
 
   props: {
@@ -70,28 +86,60 @@ export default {
   data () {
     return {
       activeNode: null,
-      hoverTimer: null
-      // searchKey: '',
-      // renderNodes: []
+      hoverTimer: null,
+      searchKey: '',
+      keyWordsTemp: '',
+      menuCheckState: {
+        checked: false,
+        indeterminate: false
+      }
     }
   },
 
   computed: {
+    config () {
+      return this.panel.config
+    },
     isEmpty () {
-      return !this.nodes.length
+      return !this.filterNodes.length
     },
     menuId () {
       return `cascader-menu-${this.index}`
     },
     isHover () {
       return this.panel.isHoverMenu
+    },
+    filterNodes () { // 经搜索词过滤后的node节点
+      if (!this.searchKey) return this.nodes
+      return this.nodes.filter(node => node.label.includes(this.searchKey))
+    },
+    menuLabel () {
+      let _labels = coerceTruthyValueToArray(this.config.panelLabels)
+      return _labels[this.index]
+    },
+    searchAndCheckVisibel () {
+      let _labels = coerceTruthyValueToArray(this.config.panelLabels)
+      return this.config.checkStrictly && this.config.multiple && !this.config.lazyMultiCheck && _labels.length
+    },
+    scrollHeight () {
+      return this.searchAndCheckVisibel ? 'calc(100% - 72px)' : '100%'
     }
   },
-
-  // mounted () {
-  //   this.renderNodes = cloneDeep(this.nodes)
-  // },
-
+  watch: {
+    'panel.checkedValue': {
+      handler () {
+        this.setMenuCheckedVal()
+      },
+      deep: true
+    },
+    'panel.activePath': {
+      handler () {
+        this.setMenuCheckedVal()
+      },
+      deep: true,
+      immediate: true
+    }
+  },
   methods: {
     handleExpand (e) {
       this.activeNode = e.target
@@ -123,15 +171,28 @@ export default {
       const { hoverZone } = this.$refs
       if (!hoverZone) return
       hoverZone.innerHTML = ''
-    }
-    // handleFilterNode: debounce(function (key) {
-    //   try {
-    //     this.renderNodes = this.nodes.filter(v => v.label.includes(key))
-    //   } catch (e) {
-    //     console.error(e)
-    //     this.renderNodes = []
-    //   }
-    // }, 500)
+    },
+    setMenuCheckedVal () {
+      if (!this.searchAndCheckVisibel) return
+      const totalNum = this.filterNodes.length
+      const checkedNum = this.filterNodes.reduce((c, p) => {
+        const num = p.checked ? 1 : (p.indeterminate ? 0.5 : 0)
+        return c + num
+      }, 0)
+      this.menuCheckState = {
+        checked: checkedNum > 0 && checkedNum === totalNum,
+        indeterminate: checkedNum > 0 && checkedNum !== totalNum
+      }
+    },
+    onMenuCheck (checked) {
+      // 标识已选中的标签
+      this.filterNodes.forEach(node => { node.doCheck(checked) })
+      this.panel.calculateMultiCheckedValue()
+    },
+    handleSearchInput: debounce(300, function (searchWords = '') {
+      this.searchKey = searchWords
+      this.setMenuCheckedVal()
+    })
   }
 }
 </script>
