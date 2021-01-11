@@ -74,6 +74,6 @@ export default {
 | --- | --- | --- | --- | --- |
 | selectWithExpand | 单选且checkStrictly为true时是否展开下一级 | boolean | - | false |
 | lazyMultiCheck | 多选且懒加载时取值 | boolean | - | false |
-
+| panelLabels | 支持单个面板搜索、全选 | Array | - | [] |
 
 [CHANGELOG](CHANGELOG.md)

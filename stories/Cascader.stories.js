@@ -107,3 +107,21 @@ LazyAndMulti.args = {
     }
   }
 }
+
+/**
+ * 支持单个面板搜索、全选
+ */
+export const PanelLabels = Template.bind({})
+PanelLabels.args = {
+  ...Base.args,
+  placeholder: '支持单个面板搜索、全选',
+  props: {
+    lazy: true,
+    multiple: true,
+    checkStrictly: true,
+    panelLabels: ['FIRST', 'SECOND', 'THIRD'],
+    lazyLoad (node, resolve) {
+      setTimeout(_ => { resolve(MockNode) }, 1000)
+    }
+  }
+}

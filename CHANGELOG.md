@@ -3,6 +3,7 @@
 
 ### Features
 
+*  增加panelLabels用于搜索和全选 ([a6d579b](https://github.com/vueblocks/elp-cascader/commit/a6d579b639f5529f9a4a8b8bd39756664fcbdbb4))
 * 新增storybook ([9333648](https://github.com/vueblocks/elp-cascader/commit/93336488f9646e31ba9a46ad46795927c5708394))
 
 
