@@ -6,9 +6,6 @@
   "main": "lib/elp-cascader.umd.min.js",
   "homepage": "https://vueblocks.github.io/elp-cascader/",
   "repository": "https://github.com/vueblocks/elp-cascader",
-  "publishConfig": {
-    "registry": "https://www.npmjs.com/package/@vueblocks/elp-cascader"
-  },
   "keywords": [
     "vueblocks",
     "cascader",

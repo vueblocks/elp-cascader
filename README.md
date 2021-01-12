@@ -1,3 +1,16 @@
+<p align="center">
+    <h3 align="center">elp-cascader</h3>
+    <br>
+    <p align="center">
+        <a href="https://www.npmjs.com/package/@vueblocks/elp-cascader"><img src="https://img.shields.io/npm/v/@vueblocks/elp-cascader?maxAge=2592000"></a>
+        <a href="https://www.npmjs.com/package/@vueblocks/elp-cascader"><img src="https://img.shields.io/npm/dt/@vueblocks/elp-cascader"></a>
+        <a href="https://github.com/vueblocks/elp-cascader/stargazers"><img src="https://img.shields.io/github/stars/vueblocks/elp-cascader.svg"></a>
+    </p>
+    <p align="center">
+       Cascader based on 'element-ui' and 'vue-virtual-scroller'<br>
+    </p>
+</p>
+
 # @vueblocks/elp-cascader
 
 > 基于`element-ui`和`vue-virtual-scroller`的级联选择器，用虚拟列表的方式逐级渲染列表。适用于数据量较大的场景。
