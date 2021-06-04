@@ -1,3 +1,12 @@
+## [0.1.5](https://github.com/vueblocks/elp-cascader/compare/v0.1.4...v0.1.5) (2021-06-04)
+
+
+### Features
+
+* 将 panelLabels 拆分为 面板搜索（panelSearch）、选中全部（checkAll）以及面板标题（panelLabels），新增 expandPanels 默认展开面板数量功能 ([933477a](https://github.com/vueblocks/elp-cascader/commit/933477a0af6c9e3f9189ffd6964adf01079915d4))
+
+
+
 ## [0.1.4](https://github.com/vueblocks/elp-cascader/compare/v0.1.3...v0.1.4) (2021-01-11)
 
 
