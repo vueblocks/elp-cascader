@@ -109,16 +109,89 @@ LazyAndMulti.args = {
 }
 
 /**
- * 支持单个面板搜索、全选
+ * 面板标题
  */
-export const PanelLabels = Template.bind({})
+export const PanelLabels = Template.bind()
 PanelLabels.args = {
-  ...Base.args,
-  placeholder: '支持单个面板搜索、全选',
+  debounce: 300,
+  size: 'medium',
+  separator: '/',
+  placeholder: '面板标题',
+  'show-all-levels': true,
+  options: MockTree.array,
+  props: {
+    panelLabels: ['FIRST', 'SECOND', 'THIRD']
+  }
+}
+
+/**
+ * 选中全部
+ */
+export const CheckAll = Template.bind()
+CheckAll.args = {
+  debounce: 300,
+  size: 'medium',
+  separator: '/',
+  placeholder: '选中全部',
+  'show-all-levels': true,
+  options: MockTree.array,
   props: {
     lazy: true,
     multiple: true,
     checkStrictly: true,
+    checkAll: true,
+    lazyLoad (node, resolve) {
+      setTimeout(_ => { resolve(MockNode) }, 1000)
+    }
+  }
+}
+
+
+/**
+ * 面板搜索
+ */
+export const PanelSearch = Template.bind()
+PanelSearch.args = {
+  debounce: 300,
+  size: 'medium',
+  separator: '/',
+  placeholder: '面板搜索',
+  'show-all-levels': true,
+  options: MockTree.array,
+  props: {
+    panelSearch: true
+  }
+}
+
+/**
+ * 默认展开面板数
+ */
+export const expandPanels = Template.bind()
+expandPanels.args = {
+  debounce: 300,
+  size: 'medium',
+  separator: '/',
+  placeholder: '默认展开面板数',
+  'show-all-levels': true,
+  options: MockTree.array,
+  props: {
+    expandPanels: 3
+  }
+}
+
+/**
+ * 单个面板搜索、全选
+ */
+export const MultiCheckSearch = Template.bind({})
+MultiCheckSearch.args = {
+  ...Base.args,
+  placeholder: '多选情况下单个面板搜索、全选',
+  props: {
+    lazy: true,
+    multiple: true,
+    checkStrictly: true,
+    checkAll: true,
+    panelSearch: true,
     panelLabels: ['FIRST', 'SECOND', 'THIRD'],
     lazyLoad (node, resolve) {
       setTimeout(_ => { resolve(MockNode) }, 1000)

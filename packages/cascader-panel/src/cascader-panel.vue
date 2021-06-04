@@ -128,7 +128,7 @@ export default {
         this.lazyLoad()
       } else {
         this.store = new Store(options, config)
-        this.menus = [this.store.getNodes()]
+        this.menus = [this.store.getNodes(), ...this.generateExcessMenus(1)]
         this.syncMenuState()
       }
     },
@@ -166,7 +166,7 @@ export default {
         this.expandNodes(nodes)
       } else {
         this.activePath = []
-        this.menus = [store.getNodes()]
+        this.menus = [store.getNodes(), ...this.generateExcessMenus(1)]
       }
     },
     expandNodes (nodes) {
@@ -235,7 +235,7 @@ export default {
       }
 
       this.activePath = path
-      this.menus = menus
+      this.menus = [...menus, ...this.generateExcessMenus(menus.length)]
 
       if (!silent) {
         const pathValues = path.map(node => node.getValue())
@@ -336,6 +336,10 @@ export default {
       } else {
         this.checkedValue = emitPath ? [] : null
       }
+    },
+    generateExcessMenus (size) {
+      const expandPanels = this.config.expandPanels || 0
+      return new Array(expandPanels - size > 0 ? expandPanels - size : 0).fill([])
     }
   }
 }
