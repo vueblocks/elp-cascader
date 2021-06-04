@@ -83,8 +83,10 @@ export default {
       options: _mock.array,
       props: {
         multiple: false,
-        checkStrictly: true,
-        selectWithExpand: false
+        checkStrictly: false,
+        selectWithExpand: false,
+        panelSearch: true,
+        panelLabels: ['一级类目', '二级类目', '三级类目']
         // lazy: true,
         // lazyLoad (node, resolve) {
         //   // const { level } = node
@@ -126,7 +128,9 @@ export default {
         lazy: true,
         multiple: true,
         checkStrictly: true,
-        panelLabels: ['一级类目', '二级类目', '三级类目'],
+        panelSearch: true,
+        checkAll: true,
+        panelLabels: ['数据连接', '分类', '数据源'],
         lazyLoad (node, resolve) {
           const { level } = node
           setTimeout(() => {

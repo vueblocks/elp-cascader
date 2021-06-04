@@ -1,17 +1,19 @@
 <template>
   <div class="elp-cascader-menu">
     <div class="elp-cascader-menu__wrap elp-cascader-menu__list">
-      <div v-if="searchAndCheckVisibel"  class="elp-search-check">
-        <div class="elp-search-check__check">
-          <div>{{menuLabel}}</div>
+      <div class="elp-search-check">
+        <div v-if="labelAndCheckAllVisible" class="elp-search-check__check">
+          <div v-if="menuLabel">{{menuLabel}}</div>
           <el-checkbox
+            v-if="checkAllVisible"
             :value="menuCheckState.checked"
             :indeterminate="menuCheckState.indeterminate"
             @change="onMenuCheck"
           >全选</el-checkbox>
         </div>
-        <div style="padding: 5px 20px">
+        <div v-if="searchVisible" style="padding: 5px 20px">
           <el-input
+            clearable
             v-model.trim="keyWordsTemp"
             placeholder="请输入内容"
             size="small"
@@ -117,12 +119,19 @@ export default {
       let _labels = coerceTruthyValueToArray(this.config.panelLabels)
       return _labels[this.index]
     },
-    searchAndCheckVisibel () {
-      let _labels = coerceTruthyValueToArray(this.config.panelLabels)
-      return this.config.checkStrictly && this.config.multiple && !this.config.lazyMultiCheck && _labels.length
+    checkAllVisible () {
+      return this.config.checkStrictly && this.config.multiple && !this.config.lazyMultiCheck && this.config.checkAll
+    },
+    labelAndCheckAllVisible () {
+      return this.menuLabel || this.checkAllVisible
+    },
+    searchVisible () {
+      return this.config.panelSearch
     },
     scrollHeight () {
-      return this.searchAndCheckVisibel ? 'calc(100% - 72px)' : '100%'
+      const labelAndCheckAllHeight = this.labelAndCheckAllVisible ? 30 : 0
+      const searchHeight = this.searchVisible ? 42 : 0
+      return `calc(100% - ${ labelAndCheckAllHeight + searchHeight }px)`
     }
   },
   watch: {
@@ -173,7 +182,7 @@ export default {
       hoverZone.innerHTML = ''
     },
     setMenuCheckedVal () {
-      if (!this.searchAndCheckVisibel) return
+      if (!this.checkAllVisible) return
       const totalNum = this.filterNodes.length
       const checkedNum = this.filterNodes.reduce((c, p) => {
         const num = p.checked ? 1 : (p.indeterminate ? 0.5 : 0)

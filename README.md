@@ -87,6 +87,9 @@ export default {
 | --- | --- | --- | --- | --- |
 | selectWithExpand | 单选且checkStrictly为true时是否展开下一级 | boolean | - | false |
 | lazyMultiCheck | 多选且懒加载时取值 | boolean | - | false |
-| panelLabels | 支持单个面板搜索、全选 | Array | - | [] |
+| panelLabels | 面板标题 | Array | - | [] |
+| checkAll | 多选且checkStrictly为true时全选 | boolean | - | false |
+| panelSearch | 面板搜索 | boolean | - | false |
+| expandPanels | 默认展开面板数 | number | - | 0 |
 
 [CHANGELOG](CHANGELOG.md)
