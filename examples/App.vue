@@ -137,6 +137,7 @@ export default {
             const nodes = Array.from({ length: level + 1 }).map(() => ({
               value: String(++id),
               label: `选项${id}`,
+              disabled: true,
               leaf: level >= 3
             }))
             // 通过调用resolve将子节点数据返回，通知组件数据加载完成

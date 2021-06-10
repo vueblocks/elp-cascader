@@ -183,7 +183,7 @@ export default {
     },
     setMenuCheckedVal () {
       if (!this.checkAllVisible) return
-      const totalNum = this.filterNodes.length
+      const totalNum = this.filterNodes.filter(it => !it.isDisabled).length
       const checkedNum = this.filterNodes.reduce((c, p) => {
         const num = p.checked ? 1 : (p.indeterminate ? 0.5 : 0)
         return c + num
@@ -195,7 +195,7 @@ export default {
     },
     onMenuCheck (checked) {
       // 标识已选中的标签
-      this.filterNodes.forEach(node => { node.doCheck(checked) })
+      this.filterNodes.forEach(node => { !node.isDisabled && node.doCheck(checked) })
       this.panel.calculateMultiCheckedValue()
     },
     handleSearchInput: debounce(300, function (searchWords = '') {
