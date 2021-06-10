@@ -13,6 +13,7 @@ const MockTree = Mock.mock({
         {
           label: '@csentence(6)',
           value: '@string()',
+          disabled: '@boolean(1, 2, true)',
           'children|2': [
             {
               label: '@csentence(6)',
