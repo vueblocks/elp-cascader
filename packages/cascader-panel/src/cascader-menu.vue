@@ -199,7 +199,7 @@ export default {
       this.panel.calculateMultiCheckedValue()
     },
     handleSearchInput: debounce(300, function (searchWords = '') {
-      this.searchKey = searchWords
+      this.searchKey = searchWords.trim()
       this.setMenuCheckedVal()
     })
   }

@@ -29,6 +29,7 @@
 <script>
 import Mock from 'mockjs'
 import ElpCascader from 'elp-cascader/packages'
+// import ElpCascader from '../packages'
 // import { CascaderPanel } from 'element-ui'
 
 const {

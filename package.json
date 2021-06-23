@@ -1,6 +1,6 @@
 {
   "name": "@vueblocks/elp-cascader",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "A vue component based on 'element-ui' and 'vue-virtual-scroller'",
   "license": "MIT",
   "main": "lib/elp-cascader.umd.min.js",
