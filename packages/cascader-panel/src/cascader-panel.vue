@@ -254,7 +254,7 @@ export default {
       if (!node) {
         node = node || { root: true, level: 0 }
         this.store = new Store([], config)
-        this.menus = [this.store.getNodes()]
+        this.menus = [this.store.getNodes(), ...this.generateExcessMenus(1)]
       }
       node.loading = true
       const resolve = dataList => {
