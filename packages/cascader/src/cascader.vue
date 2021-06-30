@@ -75,13 +75,13 @@
           :class="[
               'elp-cascader__dropdown',
               'el-popper',
-              'elp-cascader__dropdown',
                popperClass
           ]">
         <elp-cascader-panel
             ref="panel"
             v-show="!filtering"
             v-model="checkedValue"
+            :visible="dropDownVisible"
             :options="options"
             :props="config"
             :border="false"

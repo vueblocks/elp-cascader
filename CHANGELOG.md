@@ -1,3 +1,12 @@
+## [0.1.8](https://github.com/vueblocks/elp-cascader/compare/v0.1.7...v0.1.8) (2021-06-30)
+
+
+### Performance Improvements
+
+* 级联面板隐藏时，移除面板内容以减少DOM存量 ([e5f9e6e](https://github.com/vueblocks/elp-cascader/commit/e5f9e6ea712d77a7a19237b94d302ae6b034baad))
+
+
+
 ## [0.1.7](https://github.com/vueblocks/elp-cascader/compare/v0.1.6...v0.1.7) (2021-06-23)
 
 
