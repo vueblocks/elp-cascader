@@ -4,6 +4,7 @@
           'elp-cascader-panel',
           border && 'is-bordered'
        ]"
+      v-if="visible"
       @keydown="handleKeyDown">
     <cascader-menu
         ref="menu"
@@ -53,7 +54,8 @@ export default {
       type: Boolean,
       default: true
     },
-    renderLabel: Function
+    renderLabel: Function,
+    visible: Boolean
   },
 
   provide () {
