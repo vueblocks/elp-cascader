@@ -1,3 +1,12 @@
+## [0.1.9](https://github.com/vueblocks/elp-cascader/compare/v0.1.8...v0.1.9) (2021-07-16)
+
+
+### Performance Improvements
+
+* 优化节点树加载速度，添加懒加载完成事件 ([6a9f8eb](https://github.com/vueblocks/elp-cascader/commit/6a9f8eb1267583d570b62fa1d5bd5ac2fd164534))
+
+
+
 ## [0.1.8](https://github.com/vueblocks/elp-cascader/compare/v0.1.7...v0.1.8) (2021-06-30)
 
 
