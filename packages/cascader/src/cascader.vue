@@ -88,6 +88,7 @@
             :empty-text="emptyText"
             :render-label="$scopedSlots.default"
             @expand-change="handleExpandChange"
+            @lazy-loaded="handleLazyLoaded"
             @close="toggleDropDownVisible(false)"
         />
         <scrollbar
@@ -428,6 +429,9 @@ export default {
       this.$nextTick(this.updatePopper.bind(this))
       this.$emit('expand-change', value)
       this.$emit('active-item-change', value) // Deprecated
+    },
+    handleLazyLoaded (value) {
+      this.$emit('lazy-loaded', value)
     },
     focusFirstNode () {
       this.$nextTick(() => {
