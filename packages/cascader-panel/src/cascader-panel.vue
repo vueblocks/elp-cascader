@@ -265,6 +265,10 @@ export default {
         node.loading = false
         node.loaded = true
 
+        if (this.loadCount === 0) {
+          this.menus = [this.store.getNodes(), ...this.generateExcessMenus(1)]
+        }
+
         // dispose default value on lazy load mode
         if (Array.isArray(this.checkedValue)) {
           const nodeValue = this.checkedValue[this.loadCount++]
@@ -278,6 +282,10 @@ export default {
               this.lazyLoad(checkedNode, () => {
                 this.handleExpand(checkedNode)
               })
+            }
+
+            if (checkedNode.data[leafKey] && this.config.lazy) {
+              this.$emit('lazy-loaded', this.checkedValue)
             }
 
             if (this.loadCount === this.checkedValue.length) {
@@ -339,7 +347,7 @@ export default {
         this.checkedValue = emitPath ? [] : null
       }
     },
-    generateExcessMenus (size) {
+    generateExcessMenus (size = 0) {
       const expandPanels = this.config.expandPanels || 0
       return new Array(expandPanels - size > 0 ? expandPanels - size : 0).fill([])
     }

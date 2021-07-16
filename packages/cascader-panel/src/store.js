@@ -27,24 +27,29 @@ export default class Store {
     this.leafNodes = this.getFlattedNodes(true, false)
   }
 
-  appendNode (nodeData, parentNode) {
-    const node = new Node(nodeData, this.config, parentNode)
-    const children = parentNode ? parentNode.children : this.nodes
-
-    // Skip if the node already exists
-    const _idx = children.findIndex(item => item.value === node.value)
-    if (_idx > -1) {
-      // replace the old node when the value repeats
-      // children.splice(_idx, 1, node)
-      return
-    }
-
-    children.push(node)
-  }
-
   appendNodes (nodeDataList, parentNode) {
     nodeDataList = coerceTruthyValueToArray(nodeDataList)
-    nodeDataList.forEach(nodeData => this.appendNode(nodeData, parentNode))
+    const children = parentNode ? parentNode.children : this.nodes
+    const nodes = []
+
+    for (let i = 0, length = nodeDataList.length; i < length; i++) {
+      const node = new Node(nodeDataList[i], this.config, parentNode)
+
+      // Skip if the node already exists
+      const _idx = children.findIndex(item => item.value === node.value)
+      if (_idx > -1) {
+        // replace the old node when the value repeats
+        // children.splice(_idx, 1, node)
+        break
+      }
+
+      nodes.push(node)
+    }
+    if (parentNode) {
+      parentNode.children = Object.freeze(nodes)
+    } else {
+      this.nodes = Object.freeze(nodes)
+    }
   }
 
   getNodes () {

@@ -92,4 +92,10 @@ export default {
 | panelSearch | 面板搜索 | boolean | - | false |
 | expandPanels | 默认展开面板数 | number | - | 0 |
 
+4. Cascader、CascaderPanel 新增事件
+
+| 参数 | 说明 | 回调参数
+| --- | --- | --- |
+| lazy-loaded | 惰性加载完毕后触发 | 选中节点的值 |
+
 [CHANGELOG](CHANGELOG.md)
