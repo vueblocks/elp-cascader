@@ -265,7 +265,7 @@ export default {
         node.loading = false
         node.loaded = true
 
-        if (this.loadCount === 0) {
+        if (this.loadCount === 0 && this.menus[0] && !this.menus[0].length) {
           this.menus = [this.store.getNodes(), ...this.generateExcessMenus(1)]
         }
 
@@ -348,7 +348,7 @@ export default {
       }
     },
     generateExcessMenus (size = 0) {
-      const expandPanels = this.config.expandPanels || 0
+      const expandPanels = this.config.expandPanels || 1
       return new Array(expandPanels - size > 0 ? expandPanels - size : 0).fill([])
     }
   }
