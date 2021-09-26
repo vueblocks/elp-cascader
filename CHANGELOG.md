@@ -1,3 +1,12 @@
+## [0.1.10](https://github.com/vueblocks/elp-cascader/compare/v0.1.9...v0.1.10) (2021-09-26)
+
+
+### Bug Fixes
+
+* 修复懒加载情况下panel被覆盖的问题 ([10ea8db](https://github.com/vueblocks/elp-cascader/commit/10ea8dbf51536d9c65acfbbac6e33ad0cc5ea4c0))
+
+
+
 ## [0.1.9](https://github.com/vueblocks/elp-cascader/compare/v0.1.8...v0.1.9) (2021-07-16)
 
 

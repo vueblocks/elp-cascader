@@ -14,7 +14,8 @@ const DefaultProps = {
   expandTrigger: 'click', // click / hover
   hoverThreshold: 500,
   selectWithExpand: true, // when node is selectable, click event trigger expand event
-  lazyMultiCheck: false // effective when lazy===true&checkStrictly===false
+  lazyMultiCheck: false, // effective when lazy===true&checkStrictly===false
+  expandPanels: 1
 }
 
 export {
