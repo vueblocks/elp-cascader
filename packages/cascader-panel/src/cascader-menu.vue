@@ -15,14 +15,15 @@
           <el-input
             clearable
             v-model.trim="keyWordsTemp"
-            placeholder="请输入内容"
+            :placeholder="menuPlaceholder"
             size="small"
             suffix-icon="el-icon-search"
             @input="handleSearchInput"
           />
         </div>
       </div>
-      <div v-if="isEmpty" class="elp-cascader-menu__empty-text">
+      <div v-if="searchLoading" class="elp-cascader-menu__empty-text">加载中</div>
+      <div v-else-if="isEmpty" class="elp-cascader-menu__empty-text">
         {{ emptyText }}
       </div>
       <recycle-scroller
@@ -37,6 +38,7 @@
           :key="item.uid"
           :node="item"
           :node-id="`${menuId}-${index}`"
+          :insertMode="searching"
           :aria-haspopup="item.hasChildren"
           :aria-owns="item.hasChildren ? menuId : null"
           @expand="isHover && handleExpand"
@@ -60,6 +62,7 @@ import { coerceTruthyValueToArray } from 'element-ui/src/utils/util'
 import CascaderNode from './cascader-node.vue'
 import ElCheckbox from 'element-ui/packages/checkbox'
 import debounce from 'throttle-debounce/debounce'
+
 
 export default {
   name: 'ElpCascaderMenu',
@@ -94,7 +97,10 @@ export default {
       menuCheckState: {
         checked: false,
         indeterminate: false
-      }
+      },
+      searching: false,
+      searchLoading: false,
+      searchNodes: []
     }
   },
 
@@ -112,6 +118,7 @@ export default {
       return this.panel.isHoverMenu
     },
     filterNodes () { // 经搜索词过滤后的node节点
+      if (this.hasRemote && this.searching) return this.searchNodes
       if (!this.searchKey) return this.nodes
       return this.nodes.filter(node => node.label.includes(this.searchKey))
     },
@@ -119,8 +126,12 @@ export default {
       let _labels = coerceTruthyValueToArray(this.config.panelLabels)
       return _labels[this.index]
     },
+    menuPlaceholder () {
+      const _placeholders = coerceTruthyValueToArray(this.config.panelPlaceholder)
+      return _placeholders[this.index] || '请输入内容'
+    },
     checkAllVisible () {
-      return this.config.checkStrictly && this.config.multiple && !this.config.lazyMultiCheck && this.config.checkAll
+      return this.config.checkStrictly && this.config.multiple && !this.config.lazyMultiCheck && this.config.checkAll && !this.hasRemote
     },
     labelAndCheckAllVisible () {
       return this.menuLabel || this.checkAllVisible
@@ -132,6 +143,9 @@ export default {
       const labelAndCheckAllHeight = this.labelAndCheckAllVisible ? 30 : 0
       const searchHeight = this.searchVisible ? 42 : 0
       return `calc(100% - ${ labelAndCheckAllHeight + searchHeight }px)`
+    },
+    hasRemote () {
+      return typeof this.config.remoteInitMethods === 'function' && this.index === 0
     }
   },
   watch: {
@@ -146,6 +160,12 @@ export default {
         this.setMenuCheckedVal()
       },
       deep: true,
+      immediate: true
+    },
+    searching: {
+      handler (val) {
+        this.panel.isKeyWordSearching = val
+      },
       immediate: true
     }
   },
@@ -199,9 +219,26 @@ export default {
       this.panel.calculateMultiCheckedValue()
     },
     handleSearchInput: debounce(300, function (searchWords = '') {
+      // 适应大数据量，首层可以进行懒加载
+      if (this.hasRemote) {
+        this.searching = !!searchWords
+        this.handlerRemoteSearch()
+      }
       this.searchKey = searchWords.trim()
       this.setMenuCheckedVal()
-    })
+    }),
+    handlerRemoteSearch () {
+      if (!this.hasRemote) return
+      const  { remoteInitMethods } = this.config
+      this.panel.initSearchStatus(!!this.keyWordsTemp)
+      if (!this.keyWordsTemp) return
+      this.searchLoading = true
+      const fufiled = (nodeLists) => {
+        this.searchLoading = false
+        this.searchNodes = this.panel.store.createNodes(nodeLists, this.config)
+      }
+      remoteInitMethods(this.keyWordsTemp, fufiled)
+    }
   }
 }
 </script>

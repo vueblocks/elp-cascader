@@ -27,6 +27,15 @@ export default class Store {
     this.leafNodes = this.getFlattedNodes(true, false)
   }
 
+  createNodes (data, config) {
+    data = coerceTruthyValueToArray(data)
+    const { value: valueKey } = config
+    return data.map(node => {
+      const _cur = this.nodes.find(it => it.value === node[valueKey])
+      return _cur || new Node(node, config)
+    })
+  }
+
   appendNodes (nodeDataList, parentNode) {
     nodeDataList = coerceTruthyValueToArray(nodeDataList)
     const children = parentNode ? parentNode.children : this.nodes
@@ -50,6 +59,23 @@ export default class Store {
     } else {
       this.nodes = Object.freeze(nodes)
     }
+  }
+
+  unshiftNodes (nodeIntance) {
+    nodeIntance = coerceTruthyValueToArray(nodeIntance)
+    const nodes = this.nodes
+
+    for (let i = 0, length = nodeIntance.length; i < length; i++) {
+      const node = nodeIntance[i]
+
+      // Skip if the node already exists
+      const _idx = nodes.findIndex(item => item.value === node.value)
+      if (_idx > -1) {
+        break
+      }
+      nodes.unshift(node)
+    }
+    this.nodes = nodes
   }
 
   getNodes () {

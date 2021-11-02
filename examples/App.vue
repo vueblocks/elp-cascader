@@ -8,9 +8,8 @@
     <!--    />-->
     <cascader
         v-model="lazyValue"
-        :props="lazyProps"
-        :options="lazyOptions"
-        filterable
+        :props="lazyMutiProps"
+        :options="options"
         style="margin: 100px 0;width: 400px"
         @expand-change="expandChange"
     />
@@ -18,7 +17,7 @@
         v-model="lazyCheck"
         :props="lazyMutiProps"
         :options="options"
-        filterable
+        :remoteInitMethods="remoteInitMethods"
         style="margin: 100px 0;width: 400px"
         @expand-change="expandChange"
     />
@@ -132,13 +131,14 @@ export default {
         panelSearch: true,
         checkAll: true,
         panelLabels: ['数据连接', '分类', '数据源'],
+        panelPlaceholder: ['远程搜素'],
         lazyLoad (node, resolve) {
           const { level } = node
           setTimeout(() => {
             const nodes = Array.from({ length: level + 1 }).map(() => ({
               value: String(++id),
               label: `选项${id}`,
-              disabled: true,
+              // disabled: true,
               leaf: level >= 3
             }))
             // 通过调用resolve将子节点数据返回，通知组件数据加载完成
@@ -151,6 +151,11 @@ export default {
   methods: {
     expandChange (parentArr) {
       console.info(parentArr)
+    },
+    remoteInitMethods (key, resolve) {
+      setTimeout(() => {
+        resolve([ {label: 1, value: 1}, {label: 2, value: 2}])
+      }, 500)
     }
   }
 }

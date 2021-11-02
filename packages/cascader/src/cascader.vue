@@ -73,9 +73,9 @@
           v-show="dropDownVisible"
           ref="popper"
           :class="[
-              'elp-cascader__dropdown',
-              'el-popper',
-               popperClass
+            'elp-cascader__dropdown',
+            'el-popper',
+            popperClass
           ]">
         <elp-cascader-panel
             ref="panel"
@@ -87,6 +87,7 @@
             :border="false"
             :empty-text="emptyText"
             :render-label="$scopedSlots.default"
+            :remoteInitMethods="remoteInitMethods"
             @expand-change="handleExpandChange"
             @lazy-loaded="handleLazyLoaded"
             @close="toggleDropDownVisible(false)"
@@ -201,6 +202,9 @@ export default {
     emptyText: {
       type: String,
       default: '暂无数据'
+    },
+    remoteInitMethods: {
+      type: Function
     }
   },
 

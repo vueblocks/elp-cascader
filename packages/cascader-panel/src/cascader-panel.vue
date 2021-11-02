@@ -55,7 +55,8 @@ export default {
       default: true
     },
     renderLabel: Function,
-    visible: Boolean
+    visible: Boolean,
+    remoteInitMethods: Function
   },
 
   provide () {
@@ -71,13 +72,14 @@ export default {
       loadCount: 0,
       activePath: [],
       checkedValue: null,
-      checkedNodePaths: []
+      checkedNodePaths: [],
+      isKeyWordSearching: false // menu 正在接入远程搜索
     }
   },
 
   computed: {
     config () {
-      return merge({ ...DefaultProps }, this.props || {})
+      return merge({ ...DefaultProps }, this.props || {}, { remoteInitMethods: this.remoteInitMethods })
     },
     multiple () {
       return this.config.multiple
@@ -99,6 +101,7 @@ export default {
   watch: {
     options: {
       handler: function () {
+        if (this.isKeyWordSearching) return
         this.initStore()
       },
       immediate: true,
@@ -124,6 +127,15 @@ export default {
   },
 
   methods: {
+    initSearchStatus (hasSearchWord) {
+      if (hasSearchWord) {
+        this.menus = [this.store.getNodes(), ...this.generateExcessMenus(1)]
+        this.activePath = []
+      } else {
+        this.menus = [this.store.getNodes(), ...this.generateExcessMenus(1)]
+        this.syncMenuState()
+      }
+    },
     initStore () {
       const { config, options } = this
       if (config.lazy && isEmpty(options)) {
