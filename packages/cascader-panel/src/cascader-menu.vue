@@ -131,7 +131,9 @@ export default {
       return _placeholders[this.index] || '请输入内容'
     },
     checkAllVisible () {
-      return this.config.checkStrictly && this.config.multiple && !this.config.lazyMultiCheck && this.config.checkAll && !this.hasRemote
+      const { checkStrictly, multiple, lazyMultiCheck, checkAll } = this.config
+      const validCheck = Array.isArray(checkAll) ? checkAll.includes(this.index) : checkAll
+      return checkStrictly && multiple && !lazyMultiCheck && validCheck && !this.hasRemote
     },
     labelAndCheckAllVisible () {
       return this.menuLabel || this.checkAllVisible

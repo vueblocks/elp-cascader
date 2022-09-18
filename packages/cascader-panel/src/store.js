@@ -76,6 +76,8 @@ export default class Store {
       nodes.unshift(node)
     }
     this.nodes = nodes
+    this.flattedNodes = this.getFlattedNodes(false, false)
+    this.leafNodes = this.getFlattedNodes(true, false)
   }
 
   getNodes () {
