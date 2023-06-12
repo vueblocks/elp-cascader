@@ -12,6 +12,8 @@
         :key="index"
         :nodes="menu"
         :index="index"
+        :empty-text="emptyText"
+        :panel-placeholder="panelPlaceholder"
     />
   </div>
 </template>
@@ -55,7 +57,9 @@ export default {
       default: true
     },
     renderLabel: Function,
-    visible: Boolean
+    emptyText: String,
+    visible: Boolean,
+    panelPlaceholder: String
   },
 
   provide () {

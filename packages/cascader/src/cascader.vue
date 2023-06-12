@@ -87,6 +87,7 @@
             :border="false"
             :empty-text="emptyText"
             :render-label="$scopedSlots.default"
+            :panel-placeholder="panelPlaceholder"
             @expand-change="handleExpandChange"
             @lazy-loaded="handleLazyLoaded"
             @close="toggleDropDownVisible(false)"
@@ -176,6 +177,7 @@ export default {
       type: String,
       default: '请选择'
     },
+    panelPlaceholder: String,
     disabled: Boolean,
     clearable: Boolean,
     filterable: Boolean,

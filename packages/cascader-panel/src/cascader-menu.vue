@@ -15,7 +15,7 @@
           <el-input
             clearable
             v-model.trim="keyWordsTemp"
-            placeholder="请输入内容"
+            :placeholder="panelPlaceholder"
             size="small"
             suffix-icon="el-icon-search"
             @input="handleSearchInput"
@@ -82,6 +82,10 @@ export default {
     emptyText: {
       type: String,
       default: '暂无数据'
+    },
+    panelPlaceholder: {
+      type: String,
+      default: '请输入内容'
     }
   },
 

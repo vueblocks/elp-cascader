@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <cascader :props="props" :options="options" size="small" collapse-tags filterable clearable style="width: 400px" />
+    <cascader :props="props" :options="options" size="small" collapse-tags filterable clearable style="width: 400px"
+              :emptyText="emptyText" :panelPlaceholder="'please input'"/>
     <!--    <cascader-panel-->
     <!--        :options="options"-->
     <!--        :props="props"-->
@@ -97,6 +98,7 @@ export default {
         // }
         // expandTrigger: 'hover'
       },
+      emptyText: '12222',
       // lazy cascader
       lazyValue: [
         ['1', '2']
