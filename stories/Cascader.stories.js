@@ -35,6 +35,8 @@ const MockNode = Mock.mock({
   ]
 })
 
+
+
 export default {
   title: 'Example/Cascader',
   component: Cascader,
@@ -196,6 +198,34 @@ MultiCheckSearch.args = {
     panelLabels: ['FIRST', 'SECOND', 'THIRD'],
     lazyLoad (node, resolve) {
       setTimeout(_ => { resolve(MockNode) }, 1000)
+    }
+  }
+}
+
+/**
+ * 首层远程搜索
+ */
+
+
+export const FristRemote = Template.bind({})
+FristRemote.args = {
+  ...Base.args,
+  placeholder: '首层远程搜索',
+  remoteInitMethods: (val, resolve) => {
+    resolve([
+      { label: '远程搜索', value: '1', leaf: false }
+    ])
+  },
+  props: {
+    lazy: true,
+    multiple: true,
+    checkStrictly: true,
+    checkAll: true,
+    panelSearch: true,
+    panelLabels: ['FIRST', 'SECOND', 'THIRD'],
+    panelPlaceholder: ['远程搜素'],
+    lazyLoad (node, resolve) {
+      setTimeout(_ => { resolve(MockNode.array) }, 1000)
     }
   }
 }

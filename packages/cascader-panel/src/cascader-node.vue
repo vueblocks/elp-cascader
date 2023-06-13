@@ -19,6 +19,7 @@ export default {
     node: {
       required: true
     },
+    insertMode: Boolean,
     nodeId: String
   },
 
@@ -52,9 +53,15 @@ export default {
   },
 
   methods: {
+    insertSearchNode () {
+      if (!this.insertMode) return
+      this.panel.store.unshiftNodes(this.node)
+    },
     handleExpand () {
       const { panel, node, isDisabled, config } = this
+      if (this.insertMode) this.insertSearchNode()
       const { multiple, checkStrictly } = config
+      // 如果拓展，则加入之前的引用
 
       if (!checkStrictly && isDisabled || node.loading) return
 
@@ -77,11 +84,13 @@ export default {
 
     handleCheckChange () {
       const { panel, value, node } = this
+      this.insertSearchNode()
       panel.handleCheckChange(value)
       if (panel.config.selectWithExpand) panel.handleExpand(node)
     },
 
     handleMultiCheckChange (checked) {
+      this.insertSearchNode()
       this.node.doCheck(checked)
       this.panel.calculateMultiCheckedValue()
     },
