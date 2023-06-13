@@ -1,3 +1,26 @@
+## [0.2.1](https://github.com/vueblocks/elp-cascader/compare/v0.2.0...v0.2.1) (2023-06-13)
+
+
+### Bug Fixes
+
+* 首层搜索节点无法选中 ([77ae674](https://github.com/vueblocks/elp-cascader/commit/77ae674ef03d0d8d40097b8b2f68f33efd3bbc46))
+
+
+### Features
+
+* 新增初级远程搜索功能 ([f01fb3d](https://github.com/vueblocks/elp-cascader/commit/f01fb3d43c02fac17b700b56390194276679f70e))
+
+
+
+# [0.2.0](https://github.com/vueblocks/elp-cascader/compare/v0.1.10...v0.2.0) (2023-06-12)
+
+
+### Features
+
+* 新增属性panelPlaceholder用于定制文案 ([76d6b37](https://github.com/vueblocks/elp-cascader/commit/76d6b37cdecf4c0a6a5bf9136ebe2916525acb74))
+
+
+
 ## [0.1.10](https://github.com/vueblocks/elp-cascader/compare/v0.1.9...v0.1.10) (2021-09-26)
 
 
@@ -48,7 +71,6 @@
 
 ### Features
 
-*  增加panelLabels用于搜索和全选 ([a6d579b](https://github.com/vueblocks/elp-cascader/commit/a6d579b639f5529f9a4a8b8bd39756664fcbdbb4))
 * 将 panelLabels 拆分为 面板搜索（panelSearch）、选中全部（checkAll）以及面板标题（panelLabels），新增 expandPanels 默认展开面板数量功能 ([933477a](https://github.com/vueblocks/elp-cascader/commit/933477a0af6c9e3f9189ffd6964adf01079915d4))
 
 
@@ -58,6 +80,7 @@
 
 ### Features
 
+*  增加panelLabels用于搜索和全选 ([a6d579b](https://github.com/vueblocks/elp-cascader/commit/a6d579b639f5529f9a4a8b8bd39756664fcbdbb4))
 * 新增storybook ([9333648](https://github.com/vueblocks/elp-cascader/commit/93336488f9646e31ba9a46ad46795927c5708394))
 
 
