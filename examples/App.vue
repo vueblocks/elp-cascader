@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <cascader :props="props" :options="options" size="small" collapse-tags filterable clearable style="width: 400px"
-              :emptyText="emptyText" :panelPlaceholder="'please input'"/>
+              :emptyText="emptyText" />
     <!--    <cascader-panel-->
     <!--        :options="options"-->
     <!--        :props="props"-->
@@ -87,7 +87,8 @@ export default {
         checkStrictly: false,
         selectWithExpand: false,
         panelSearch: true,
-        panelLabels: ['一级类目', '二级类目', '三级类目']
+        panelLabels: ['一级类目', '二级类目', '三级类目'],
+        panelPlaceholder: ['请搜索一级', '请搜索二级', '请搜索三级'],
         // lazy: true,
         // lazyLoad (node, resolve) {
         //   // const { level } = node
@@ -97,7 +98,7 @@ export default {
         // }
         // expandTrigger: 'hover'
       },
-      emptyText: '12222',
+      emptyText: 'no data',
       // lazy cascader
       lazyValue: [
         ['1', '2']

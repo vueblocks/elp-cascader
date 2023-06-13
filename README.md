@@ -90,7 +90,10 @@ export default {
 | panelLabels | 面板标题 | Array | - | [] |
 | checkAll | 多选且checkStrictly为true时全选 | boolean | - | false |
 | panelSearch | 面板搜索 | boolean | - | false |
+| panelLabels | 面板搜索标题 | Array | - | [] |
+| panelPlaceholder | 面板搜索placeholder | Array | - | [] |
 | expandPanels | 默认展开面板数 | number | - | 0 |
+| emptyText | 无匹配数据时展示文案 | string | - | '暂无数据' |
 
 4. Cascader、CascaderPanel 新增事件
 

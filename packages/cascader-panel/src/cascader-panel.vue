@@ -13,7 +13,6 @@
         :nodes="menu"
         :index="index"
         :empty-text="emptyText"
-        :panel-placeholder="panelPlaceholder"
     />
   </div>
 </template>
@@ -57,10 +56,9 @@ export default {
       default: true
     },
     renderLabel: Function,
-    emptyText: String,
     visible: Boolean,
-    remoteInitMethods: Function,
-    panelPlaceholder: String
+    emptyText: String,
+    remoteInitMethods: Function
   },
 
   provide () {
